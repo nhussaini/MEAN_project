@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // allows typescript to find it.
+import { ReactiveFormsModule } from '@angular/forms'; // allows typescript to find it.
 import { HttpClientModule } from '@angular/common/http';
 import {
   MatInputModule,
@@ -28,7 +28,7 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule, // now angular is aware of form features
     MatInputModule,
     MatCardModule,
