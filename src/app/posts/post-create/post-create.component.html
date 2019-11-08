@@ -4,7 +4,7 @@
           <input
            matInput type="text"
             name="title"
-            [ngModel]="post.title"
+            [ngModel]="post?.title"
             required
             placeholder="Post Title"
             #title="ngModel">  <!--ngModel registers this input field as a control to the form-->
@@ -15,7 +15,7 @@
             matInput
             rows="4"
             name="content"
-            [ngModel]="post.content"
+            [ngModel]="post?.content"
             required
             placeholder="Post Content"
             #content="ngModel">
