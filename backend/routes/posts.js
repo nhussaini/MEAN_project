@@ -36,14 +36,19 @@ router.use((req,res,next) => {
 });
 
 router.post('', multer({storage:storage }).single('image'), (req, res, next) => {
+  const url = req.protocol + '://' + req.get("host"); //constructs a url to our server
   const post = new Post({
     title: req.body.title,
-    content: req.body.content
+    content: req.body.content,
+    imagePath: url + "/images/"+ req.file.fieldname
   });
   post.save().then(createdPost => {
     res.status(201).json({
       message:'post added successfully',
-      postId: createdPost._id
+      post: {
+        ...createdPost,//copies the properties of all the other object and then overwrites the desrired property as below
+        id: createdPost._id
+      }
   });
   });
 
