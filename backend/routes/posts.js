@@ -74,19 +74,15 @@ router.put('/:id', multer({storage:storage }).single('image'), (req, res, next) 
 });
 
 router.get('', (req, res, next) => {
-  // const posts = [
-  //   {
-  //     id:'01a',
-  //     title:'First server post',
-  //     content:'This is coming form the server'
-  //   },
-  //   {
-  //     id:'02b',
-  //     title:'second server post',
-  //     content:'This is also coming form the server'
-  //   }
-  // ];
-  Post.find().then(documents => {
+  const pageSize = req.query.pageSize;
+  const currentPage = req.query.page;
+  const postQuery = Post.find();
+  if(pageSize && currentPage){
+    postQuery
+      .skip(pageSize * (currentPage - 1))
+      .limit(pageSize);
+  }
+  postQuery.then(documents => {
     res.status(200).json({
       message:'posts fetched successfully!',
       posts: documents
