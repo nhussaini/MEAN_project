@@ -77,15 +77,20 @@ router.get('', (req, res, next) => {
   const pageSize = +req.query.pagesize;//+ sign converts the string coming from url to number. anything comes from url is of type string
   const currentPage = +req.query.page;
   const postQuery = Post.find();
+  let fetchedPosts;
   if(pageSize && currentPage){
     postQuery
       .skip(pageSize * (currentPage - 1))
       .limit(pageSize);
   }
   postQuery.then(documents => {
+    fetchedPosts = document;
+    return Post.count();
+  }).then(count=>{
     res.status(200).json({
       message:'posts fetched successfully!',
-      posts: documents
+      posts: fetchedPosts,
+      maxPosts: count
     });
   });
 });
