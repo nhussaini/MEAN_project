@@ -74,8 +74,8 @@ router.put('/:id', multer({storage:storage }).single('image'), (req, res, next) 
 });
 
 router.get('', (req, res, next) => {
-  const pageSize = req.query.pageSize;
-  const currentPage = req.query.page;
+  const pageSize = +req.query.pagesize;//+ sign converts the string coming from url to number. anything comes from url is of type string
+  const currentPage = +req.query.page;
   const postQuery = Post.find();
   if(pageSize && currentPage){
     postQuery
